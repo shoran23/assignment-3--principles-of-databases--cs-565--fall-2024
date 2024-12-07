@@ -180,15 +180,12 @@ app.get(`/delete-a-db-record`, (req, res) => {
 
 // TODO: update the console.log statements with colors to match the server startup
 app.post(`/delete-a-db-record`, (req, res) => {
-    db.collection(dbCollection).findOne({ name: "Tran" }, (err, result) => {
+    db.collection(dbCollection).deleteOne(req.body, (err, result) => {
         if(err) {
             console.log(`${colors.red}DELETE POST: Error = `, err);
         } else {
-            if(result) {
-                console.log(result);
-                // TODO: continue to deleting the record
-            } else {
-                console.log(`${colors.red}DELETE POST: user ${req.body.name} not found`);
+            if(result.acknowledged) {
+                console.log(`${colors.green}DELETE POST: Successfully Deleted User ${req.body.name}`);
             }
         }
     });
