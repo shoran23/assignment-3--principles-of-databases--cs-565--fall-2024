@@ -178,15 +178,13 @@ app.get(`/delete-a-db-record`, (req, res) => {
     });
 });
 
-// TODO: update the console.log statements with colors to match the server startup
 app.post(`/delete-a-db-record`, (req, res) => {
     db.collection(dbCollection).deleteOne(req.body, (err, result) => {
         if(err) {
             console.log(`${colors.red}DELETE POST: Error = `, err);
         } else {
             if(result.acknowledged) {
-                console.log(`${colors.green}DELETE POST: Successfully Deleted User ${req.body.name}`);
-
+                console.log(`${colors.green}DELETE POST: Deleted ${result.deletedCount} Users Name ${req.body.name}`);
             }
         }
     });
