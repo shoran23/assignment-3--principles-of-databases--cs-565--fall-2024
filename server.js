@@ -161,7 +161,10 @@ app.get(`/update-a-db-record`, (req, res) => {
     });
 });
 
-
+/*
+    * This router handles POST requests to
+    * http://localhost:3000/update-a-db-record
+*/
 app.post(`/update-a-db-record`, (req, res) => {
     db.collection(dbCollection).updateOne({name: req.body.name}, {$set: {password: req.body.password}}, (err, result) => {
         if(err) {
@@ -169,6 +172,8 @@ app.post(`/update-a-db-record`, (req, res) => {
         } else {
             if(result.acknowledged) {
                 console.log(`${colors.green}UPDATE POST: Updated User ${req.body.name}'s password`);
+            } else {
+                console.log(`${colors.red}UPDATE POST: Unsuccessful`)
             }
         }
     });
@@ -199,8 +204,11 @@ app.post(`/delete-a-db-record`, (req, res) => {
         } else {
             if(result.acknowledged) {
                 console.log(`${colors.green}DELETE POST: Deleted ${result.deletedCount} User${result.deletedCount > 1 ? 's' : ''} Name ${req.body.name}`);
+            } else {
+                console.log(`${colors.red}DELETE POST: Unsuccessful`)
             }
         }
     });
+
     res.redirect("/delete-a-db-record");
 });
