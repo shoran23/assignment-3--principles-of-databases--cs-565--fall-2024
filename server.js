@@ -161,6 +161,12 @@ app.get(`/update-a-db-record`, (req, res) => {
     });
 });
 
+//TODO: finish the update post
+// app.post(`/update-a-db-record`, (req, res) => {
+//     console.log(req);
+// });
+
+
 /*
  * This router handles GET requests to
  * http://localhost:3000/delete-a-db-record/
@@ -169,5 +175,21 @@ app.get(`/delete-a-db-record`, (req, res) => {
     db.collection(dbCollection).find().toArray((err, arrayObject) => {
         res.render(`delete-a-record-in-database.njk`,
             {mongoDBArray: arrayObject});
+    });
+});
+
+// TODO: update the console.log statements with colors to match the server startup
+app.post(`/delete-a-db-record`, (req, res) => {
+    db.collection(dbCollection).findOne({ name: "Tran" }, (err, result) => {
+        if(err) {
+            console.log(`${colors.red}DELETE POST: Error = `, err);
+        } else {
+            if(result) {
+                console.log(result);
+                // TODO: continue to deleting the record
+            } else {
+                console.log(`${colors.red}DELETE POST: user ${req.body.name} not found`);
+            }
+        }
     });
 });
