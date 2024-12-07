@@ -186,7 +186,9 @@ app.post(`/delete-a-db-record`, (req, res) => {
         } else {
             if(result.acknowledged) {
                 console.log(`${colors.green}DELETE POST: Successfully Deleted User ${req.body.name}`);
+
             }
         }
     });
+    res.redirect("/delete-a-db-record");
 });
