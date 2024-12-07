@@ -167,6 +167,7 @@ app.get(`/update-a-db-record`, (req, res) => {
 // });
 
 
+
 /*
  * This router handles GET requests to
  * http://localhost:3000/delete-a-db-record/
@@ -178,13 +179,17 @@ app.get(`/delete-a-db-record`, (req, res) => {
     });
 });
 
+/*
+    * This router handles POST requests to
+    * http://localhost:3000/delete-a-db-record/
+*/
 app.post(`/delete-a-db-record`, (req, res) => {
     db.collection(dbCollection).deleteOne(req.body, (err, result) => {
         if(err) {
             console.log(`${colors.red}DELETE POST: Error = `, err);
         } else {
             if(result.acknowledged) {
-                console.log(`${colors.green}DELETE POST: Deleted ${result.deletedCount} Users Name ${req.body.name}`);
+                console.log(`${colors.green}DELETE POST: Deleted ${result.deletedCount} User${result.deletedCount > 1 ? 's' : ''} Name ${req.body.name}`);
             }
         }
     });
