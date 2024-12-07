@@ -161,11 +161,20 @@ app.get(`/update-a-db-record`, (req, res) => {
     });
 });
 
-//TODO: finish the update post
-// app.post(`/update-a-db-record`, (req, res) => {
-//     console.log(req);
-// });
 
+app.post(`/update-a-db-record`, (req, res) => {
+    db.collection(dbCollection).updateOne({name: req.body.name}, {$set: {password: req.body.password}}, (err, result) => {
+        if(err) {
+            console.log(`${colors.red}UPDATE POST: Error = `, err);
+        } else {
+            if(result.acknowledged) {
+                console.log(`${colors.green}UPDATE POST: Updated User ${req.body.name}'s password`);
+            }
+        }
+    });
+
+    res.redirect(`/update-a-db-record`);
+});
 
 
 /*
