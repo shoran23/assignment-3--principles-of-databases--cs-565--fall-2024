@@ -171,7 +171,8 @@ app.post(`/update-a-db-record`, (req, res) => {
             console.log(`${colors.red}UPDATE POST: Error = `, err);
         } else {
             if(result.acknowledged) {
-                console.log(`${colors.green}UPDATE POST: Updated User ${req.body.name}'s password`);
+                console.log(`${colors.green}UPDATE POST: Updated ${result.deletedCount} Record.`);
+                console.log(`${colors.green}User ${req.body.name} password has been changed`);
             } else {
                 console.log(`${colors.red}UPDATE POST: Unsuccessful`)
             }
@@ -203,7 +204,8 @@ app.post(`/delete-a-db-record`, (req, res) => {
             console.log(`${colors.red}DELETE POST: Error = `, err);
         } else {
             if(result.acknowledged) {
-                console.log(`${colors.green}DELETE POST: Deleted ${result.deletedCount} User${result.deletedCount > 1 ? 's' : ''} Name ${req.body.name}`);
+                console.log(`${colors.green}DELETE POST: Deleted ${result.deletedCount} Record.`);
+                console.log(`${colors.green}User ${req.body.name} has been deleted.`);
             } else {
                 console.log(`${colors.red}DELETE POST: Unsuccessful`)
             }
