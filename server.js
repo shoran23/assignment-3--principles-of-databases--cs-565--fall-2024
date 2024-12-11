@@ -171,7 +171,7 @@ app.post(`/update-a-db-record`, (req, res) => {
             console.log(`${colors.red}UPDATE POST: Error = `, err);
         } else {
             if(result.acknowledged) {
-                console.log(`${colors.green}UPDATE POST: Updated ${result.deletedCount} Record.`);
+                console.log(`${colors.green}UPDATE POST: Updated ${result.modifiedCount} Record.`);
                 console.log(`${colors.green}User ${req.body.name} password has been changed`);
             } else {
                 console.log(`${colors.red}UPDATE POST: Unsuccessful`)
